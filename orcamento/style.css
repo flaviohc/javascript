@@ -13,7 +13,7 @@
     .header{
         display: flex;
         flex-flow: row wrap;
-        padding: 5px 5px 0px 0px;
+        padding: 5px 0px 0px 0px;
         justify-content: center;
         width: 100%;
         /* max-width: 800px; */
@@ -78,8 +78,7 @@
     div.diacli{
         display: flex;
         flex-flow: row wrap;
-        row-gap: 10px;
-        text-align: center;
+        row-gap: 5px;
         justify-content: center;
     }
     div.itenstot{
