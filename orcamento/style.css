@@ -13,7 +13,7 @@
     .header{
         display: flex;
         flex-flow: row wrap;
-        padding: 5px 0px 0px 0px;
+        padding: 5px 5px 0px 0px;
         justify-content: center;
         width: 100%;
         /* max-width: 800px; */
@@ -109,12 +109,12 @@
     div#divcliente{
         display: inline-block;
         width: 350px;
-        text-align: "center";
+        text-align: center;
     }
     div#divdia{
         display: inline-block;
         width: 300px;
-        text-align: "center";
+        text-align: center;
     }
     div#body{
         padding: 0;
