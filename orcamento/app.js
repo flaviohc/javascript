@@ -1,8 +1,22 @@
 let quant = document.querySelector("#qnt");
 let hoje = document.querySelector("#dia");
 let total = document.querySelector("#total");
-let soma = qnt = 0;
-let html = sumText = texto = tipo = mat = cliente = dia = orc= "";
+let cliente = document.querySelector("#cliente");
+let orc = document.querySelector("#orc");
+let soma = qnt = npag = pag = valitem = 0;
+const pecaspag = 50;
+let html = sumText = texto = tipo = mat = dia = "";
+
+document.querySelector("#edit").addEventListener('click',()=>{
+    editar();
+})
+document.querySelector("#save").addEventListener('click',()=>{
+    if(hoje.value!="" && cliente.value.trim()!="" && orc.value.trim()!=""){
+        salvar();
+    }else{
+        alert("Favor preencher todos os campos.");
+    }
+})
 //let pecas=[];
 
 let pecas=['1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234'];
@@ -31,14 +45,21 @@ function remove(id){
 function listar(){
     html="";
     soma=0;
+    pag=1;
+    npag = Math.ceil(pecas.length/pecaspag);
     pecas.forEach((element, index) => {
         texto = descricao(element);
+        valitem = valor(element);
         if(index==0){
-            html+="<tr class='altquebra'><td></td><td></td><td></td><td></td><td></td></tr>";
+            html+="<tr class='altquebra'><td></td><td></td><td></td><td></td><td></td><td class='preco'></td></tr>";
         }
-        html += "<tr id='"+index+"'><td width='50px'><button id='rm"+index+"' class='del' onclick='remove("+index+")'> x </button></td><td class='inv' width='100px' align='center'>"+(pecas.length-index)+"</td><td width='100px' class='dir' align='center'>"+(index+1)+"</td><td width='130px'>"+element+".90</td><td width='350px'>"+texto+"</td></tr>";
-        if((index+1)%50==0 && index!=0){
-            html+="</table><hr class='quebra'></hr><table><tr class='altquebra'><td></td><td></td><td></td><td></td><td></td></tr>";
+        html += "<tr id='"+index+"'><td width='30px'><button id='rm"+index+"' class='del' onclick='remove("+index+")'> x </button></td><td class='inv' width='80px' align='center'>"+(pecas.length-index)+"</td><td width='80px' class='dir' align='center'>"+(index+1)+"</td><td width='110px'>"+element+".90</td><td width='260px'>"+texto+"</td><td width='200px' class='preco'>"+valitem+"</td></tr>";
+        if(((index+1)%pecaspag==0 && index!=0) || index>=(pecas.length-1)){
+            html+="<tr><td></td><td></td><td></td><td></td><td align='right' class='preco'>página "+pag+"/"+npag+"</td></tr>"
+            if(index!=(pecas.length-1)){
+                html+="</table><hr class='quebra'></hr><table><tr class='altquebra'><td></td><td></td><td></td><td></td><td></td></tr>";
+                pag++;
+            }
         }
     });
     document.querySelector("#lista").innerHTML = html;
@@ -54,8 +75,11 @@ function calcular(){
     soma += 0.9*qnt;
     sumText = soma.toFixed(2);
 
-    quant.textContent = "Quant.: " + qnt + " peças";
+    quant.textContent = "Qnt.: " + qnt + " peças";
     total.textContent = sumText;
+}
+function valor(e){
+    return (e.slice(2)+".90");
 }
 
 function descricao(e){
@@ -105,20 +129,6 @@ function descricao(e){
 
 function ativaImprimir(){
     document.querySelector('#print').addEventListener('click',()=>{
-        dia = hoje.value.slice(8,10)+"/"+hoje.value.slice(5,7)+"/"+hoje.value.slice(0,4);
-        cliente=document.querySelector("#cliente").value;
-        //dia=document.querySelector("#dia").value;
-        orc=document.querySelector("#orc").value;
-        document.querySelector("#divcliente").textContent="Cliente: "+cliente;
-        document.querySelector("#divdia").textContent="Data: "+dia;
-        document.querySelector("#porc").textContent= "Orçamento nº: "+orc;
-        document.querySelector("#spcodigo").innerHTML="";
-        document.querySelector("#spprint").innerHTML= "<button id='edit'>Editar</button>";
-        //document.querySelector(".del").style.display="none";
-    
-        document.querySelector("#edit").addEventListener('click',()=>{
-            editar();
-        })
     
         pecas.sort();
         listar();
@@ -126,13 +136,34 @@ function ativaImprimir(){
     })
 }
 
+function salvar(){
+    dia = hoje.value.slice(8,10)+"/"+hoje.value.slice(5,7)+"/"+hoje.value.slice(0,4);
+    // cliente=document.querySelector("#cliente").value;
+    document.querySelector("#divcliente").textContent="Cliente: "+cliente.value;
+    document.querySelector("#divdia").textContent="Data: "+dia;
+    document.querySelector("#porc").innerHTML= "<a href='#' onclick='editar()' id='edit'>Orçamento: "+orc.value+"</a>";
+    document.querySelector("#qnt").style.display= "inline-block";
+    document.querySelector("#tot").style.display= "inline-block";
+    document.querySelector(".thead").style.display= "block";
+    document.querySelector("#spprint").style.display= "block";
+    document.querySelector("#spcodigo").style.display= "block";
+    document.querySelector("#spsave").style.display= "none";
+    document.querySelectorAll('[id^="rm"]').forEach(element => {
+        element.style.display="block";
+    });;
+}
+
 function editar(){
-    document.querySelector("#divcliente").innerHTML="<label for='cliente'>Cliente: <input type='text' id='cliente' value='"+cliente+"'></label>";
-    document.querySelector("#divdia").innerHTML='<label for="dia">Data: <input type="date" id="dia" value='+dia+'></label>';
-    document.querySelector("#porc").innerHTML= 'Orçamento nº: <input type="text" id="orc" size="5" value='+orc+'>';
-    document.querySelector("#spcodigo").innerHTML='Código: <input type="text" maxlength="5" name="cod" id="cod"> &nbsp;';
-    document.querySelector("#spprint").innerHTML= '<button id="print">Imprimir</button>';
-    //document.querySelector(".del").style.display="block";
+    document.querySelector("#divcliente").innerHTML="<label for='cliente'>Cliente: <input type='text' id='cliente' value='"+cliente.value+"'></label>";
+    document.querySelector("#divdia").innerHTML='<label for="dia">Data: <input type="date" id="dia" value='+hoje.value+'></label>';
+    document.querySelector("#porc").innerHTML= 'Orçamento: <input type="text" id="orc" size="5" value='+orc.value+' autocomplete="off">';
+    document.querySelector("#spedit").style.display= "none";
+    document.querySelector("#spprint").style.display= "none";
+    document.querySelector("#spcodigo").style.display= "none";
+    document.querySelector("#spsave").style.display= "block";
+    document.querySelectorAll('[id^="rm"]').forEach(element => {
+        element.style.display="none"
+    });;
 
     ativaAdicionar();
     ativaImprimir();

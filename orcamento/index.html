@@ -11,7 +11,7 @@
         <header>
             <div class="header">
                 <div class="top">
-                    <strong><p id="porc">Orçamento nº: <input type="text" id="orc" size="5"></p></strong>
+                    <strong><p id="porc">Orçamento: <input type="text" id="orc" size="5" autocomplete="off"></p></strong>
                 </div>
                 <div class="diacli">
                         <div id="divcliente"><label for="cliente">Cliente: <input type="text" id="cliente"></label></div>
@@ -21,18 +21,18 @@
                 <div class="itenstot">
                     <div id="qnt">Quant.: 0 peças</div>
                     <div id="tot">Total: R$ <span id="total">0</span></div>
+                    <div id="spsave"><button id='save'>Salvar</button></div>
                 </div>
             </div>
             <section>
                 <div class="buttons">
-                    <span id="spcodigo">Cód.: <input type="text" maxlength="5" name="cod" id="cod" size="5"></span>&nbsp;
-                    <span id="spprint"><button id='edit'>Editar</button></span>&nbsp;
-                    <span id="spprint"><button id="print">Imprimir</button></span>&nbsp;
-                    <span id="spsave"><button id='save'>Salvar</button></span>
+                    <div id="spcodigo">Cód.: <input type="text" maxlength="5" name="cod" id="cod" size="5"></div>
+                    <div id="spedit"><button id='edit'>Editar</button></div>
+                    <div id="spprint"><button id="print">Imprimir</button></div>
                 </div>
                 <hr>
                 <div class="thead">
-                    <table><th><td width='50px'></td><td width='100px' align="center">ITEM</td><td width='130px'>CÓDIGO</td><td width='350px'>DESCRIÇÃO</td></th></table>
+                    <table><th><td width='30px'></td><td width='80px' align="center">Item</td><td width='105px'>Código</td><td width='260px'>Descrição</td><td width='200px' class="preco">Preço</td></th></table>
                 </div>
             </section>
         </header>
@@ -43,7 +43,6 @@
                 </div>
             </div>
         </main>
-        <!-- <div id="#gamb"></div> -->
     <script src="app.js"></script>
 </body>
 </html>
