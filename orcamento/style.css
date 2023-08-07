@@ -8,7 +8,7 @@
         font-weight: bold;
         color: rgb(87, 58, 33);
         background-color: #c8b68b;
-        font-size: 18px;
+        font-size: 14px;
     }
     .header{
         display: flex;
@@ -55,7 +55,154 @@
         background-color: #1F5673;
     }
     div.top{
-        height: 50px;
+        padding-bottom: 5px;
+        width: 350px;
+        text-align: center;
+    }
+    div.thead{
+        padding: 0px 0px 0px 0px;
+        display: none;
+    }
+    .thead, .tbuttons, .input{
+        width: 100%;
+    }
+    .input{
+        text-align: center;
+    }
+    .buttons{
+        display: flex;
+        flex-flow: row;
+        gap: 65px;
+        justify-content: center;
+    }
+    div.diacli{
+        display: flex;
+        flex-flow: row wrap;
+        row-gap: 10px;
+        text-align: center;
+        justify-content: center;
+    }
+    div.itenstot{
+        padding: 5px 0;
+        display: flex;
+        flex-flow: row wrap;
+        row-gap: 10px;
+        width: 100%;
+        justify-content: center;
+    }
+    .dir{
+        display: none;
+    }
+    .altquebra{
+        height: 0px;
+    }
+    div#qnt{
+        display: none;
+        width: 220px;
+        text-align: center;
+    }
+    div#tot{
+        display: none;
+        width: 220px;
+        text-align: center;
+    }
+    div#divcliente{
+        display: inline-block;
+        width: 300px;
+        text-align: "center";
+    }
+    div#divdia{
+        display: inline-block;
+        width: 300px;
+        text-align: "center";
+    }
+    div#body{
+        padding: 0;
+    }
+    div#lista{
+        width: 800px;
+    }
+    .del{
+        background-color: #E9190F;
+        border-radius: 20px;
+        width: 30px;
+        color: white;
+        padding: 0px;
+    }
+    .del:hover{
+        background-color: brown;
+    }
+    input{
+        height: 40px;
+        background-color: #F2EEE3;
+        border-radius: 10px;
+    }
+    table{
+        /* border: 1px solid; */
+        margin-left: auto;
+        margin-right: auto;
+    }
+    td{
+        padding: 7px 0;
+    }
+}
+
+@media screen and (min-width: 600px){
+    *{
+        padding: 0;
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bold;
+        color: rgb(87, 58, 33);
+        background-color: #c8b68b;
+        font-size: 24px;
+    }
+    .header{
+        display: flex;
+        flex-flow: row wrap;
+        padding: 5px 0px 0px 0px;
+        justify-content: center;
+        width: 100%;
+        /* max-width: 800px; */
+    }
+    .preco{
+        display: none;
+    }
+    #spedit{
+        display: none;
+    }
+    #spcodigo{
+        display: none;
+    }
+    #spprint{
+        display: none;
+    }
+    #spsave{
+        display: inline-block;
+    }
+    section{
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        row-gap: 3px;
+    }
+    button{
+        margin: 0px 0;
+        border-radius: 10px;
+        color: white;
+        padding: 5px;
+    }
+    button#print{
+        background-color: #3A7D44;
+    }
+    button#edit{
+        background-color: #B8336A;
+    }
+    button#save{
+        background-color: #1F5673;
+    }
+    div.top{
+        padding-bottom: 5px;
         width: 350px;
         text-align: center;
     }
