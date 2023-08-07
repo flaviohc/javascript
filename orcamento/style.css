@@ -15,6 +15,7 @@
         flex-flow: row wrap;
         padding: 5px 0px 0px 0px;
         justify-content: center;
+        width: 100%;
         /* max-width: 800px; */
     }
     .preco{
@@ -107,12 +108,12 @@
     }
     div#divcliente{
         display: inline-block;
-        width: 400px;
+        width: 300px;
         text-align: "center";
     }
     div#divdia{
         display: inline-block;
-        width: 400px;
+        width: 300px;
         text-align: "center";
     }
     div#body{
