@@ -53,7 +53,7 @@ function listar(){
         if(index==0){
             html+="<tr class='altquebra'><td></td><td></td><td></td><td></td><td></td><td class='preco'></td></tr>";
         }
-        html += "<tr id='"+index+"'><td width='30px'><button id='rm"+index+"' class='del' onclick='remove("+index+")'> x </button></td><td class='inv' width='80px' align='center'>"+(pecas.length-index)+"</td><td width='80px' class='dir' align='center'>"+(index+1)+"</td><td width='90px'>"+element+".90</td><td width='280px'>"+texto+"</td><td width='200px' class='preco'>"+valitem+"</td></tr>";
+        html += "<tr id='"+index+"'><td width='30px'><button id='rm"+index+"' class='del' onclick='remove("+index+")'> x </button></td><td class='inv' width='80px' align='center'>"+(pecas.length-index)+"</td><td width='80px' class='dir' align='center'>"+(index+1)+"</td><td width='90px'>"+element+".90</td><td width='260px'>"+texto+"</td><td width='200px' class='preco'>"+valitem+"</td></tr>";
         if(((index+1)%pecaspag==0 && index!=0) || index>=(pecas.length-1)){
             html+="<tr><td></td><td></td><td></td><td></td><td align='right' class='preco'>página "+pag+"/"+npag+"</td></tr>"
             if(index!=(pecas.length-1)){
