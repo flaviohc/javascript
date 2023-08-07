@@ -8,7 +8,7 @@
         font-weight: bold;
         color: rgb(87, 58, 33);
         background-color: #c8b68b;
-        font-size: 14px;
+        font-size: 16px;
     }
     .header{
         display: flex;
@@ -98,12 +98,12 @@
     }
     div#qnt{
         display: none;
-        width: 220px;
+        width: 150px;
         text-align: center;
     }
     div#tot{
         display: none;
-        width: 220px;
+        width: 150px;
         text-align: center;
     }
     div#divcliente{
@@ -146,8 +146,19 @@
         padding: 7px 0;
     }
 }
-
 @media screen and (min-width: 600px){
+    *{
+        font-size: 24px;
+    }
+    div#qnt{
+        width: 220px;
+    }
+    div#tot{
+        width: 220px;
+    }
+}
+
+/*@media screen and (min-width: 600px){
     *{
         padding: 0;
         margin: 0;
@@ -163,7 +174,7 @@
         padding: 5px 0px 0px 0px;
         justify-content: center;
         width: 100%;
-        /* max-width: 800px; */
+
     }
     .preco{
         display: none;
@@ -285,14 +296,14 @@
         border-radius: 10px;
     }
     table{
-        /* border: 1px solid; */
+
         margin-left: auto;
         margin-right: auto;
     }
     td{
         padding: 7px 0;
     }
-}
+}*/
 
 @media print{
     a{
