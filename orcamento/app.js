@@ -8,11 +8,11 @@ const pecaspag = 50;
 let html = sumText = texto = tipo = mat = dia = "";
 
 //previne atualização acidental
-// window.onbeforeunload = function(){
-//     if(confirm("Deseja atualizar a página?")==false){
-//         return "";
-//     }
-// }
+window.onbeforeunload = function(){
+    if(confirm("Deseja atualizar a página?")==false){
+        return "";
+    }
+}
 
 document.querySelector("#edit").addEventListener('click',()=>{
     editar();

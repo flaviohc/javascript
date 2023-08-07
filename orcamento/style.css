@@ -16,6 +16,7 @@
         padding: 5px 0px 0px 0px;
         justify-content: center;
         width: 100%;
+        box-shadow: 0 0 2px black;
         /* max-width: 800px; */
     }
     .preco{
@@ -58,6 +59,7 @@
         padding-bottom: 5px;
         width: 350px;
         text-align: center;
+        box-shadow: 0 0 2px black;
     }
     div.thead{
         padding: 0px 0px 0px 0px;
@@ -80,6 +82,7 @@
         flex-flow: row wrap;
         row-gap: 5px;
         justify-content: center;
+        box-shadow: 0 0 2px black;
     }
     div.itenstot{
         padding: 5px 0;
@@ -88,6 +91,7 @@
         row-gap: 10px;
         width: 100%;
         justify-content: center;
+        box-shadow: 0 0 2px black;
     }
     .dir{
         display: none;
@@ -97,23 +101,27 @@
     }
     div#qnt{
         display: none;
-        width: 150px;
+        width: 175px;
         text-align: center;
+        box-shadow: 0 0 2px black;
     }
     div#tot{
         display: none;
-        width: 150px;
+        width: 175px;
         text-align: center;
+        box-shadow: 0 0 2px black;
     }
     div#divcliente{
         display: inline-block;
         width: 350px;
         text-align: center;
+        box-shadow: 0 0 2px black;
     }
     div#divdia{
         display: inline-block;
-        width: 300px;
+        width: 350px;
         text-align: center;
+        box-shadow: 0 0 2px black;
     }
     div#body{
         padding: 0;
