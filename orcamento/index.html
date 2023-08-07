@@ -8,35 +8,42 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <section id="container">
         <header>
-            <div class="top">
-                <strong><p id="porc">Orçamento nº: <input type="text" id="orc" size="5"></p></strong>
+            <div class="header">
+                <div class="top">
+                    <strong><p id="porc">Orçamento nº: <input type="text" id="orc" size="5"></p></strong>
+                </div>
+                <div class="diacli">
+                        <div id="divcliente"><label for="cliente">Cliente: <input type="text" id="cliente"></label></div>
+
+                        <div id="divdia"><label for="dia">Data: <input type="date" id="dia"></label></div>
+                </div>
+                <div class="itenstot">
+                    <div id="qnt">Quant.: 0 peças</div>
+                    <div id="tot">Total: R$ <span id="total">0</span></div>
+                </div>
             </div>
-            <div class="top">
-                    <div id="divcliente"><label for="cliente">Cliente: <input type="text" id="cliente"></label></div>
-                    <div id="divdia"><label for="dia">Data: <input type="date" id="dia"></label></div>
-            </div>
-            <div class="top">
-                <div id="qnt">0 itens</div>
-                <div id="tot">Total: R$ <span id="total">0</span></div>
-            </div>
-            <div class="top input">
-                <span id="spcodigo">Código: <input type="text" maxlength="5" name="cod" id="cod"> &nbsp;</span>
-                <span id="spprint"><button id="print">Imprimir</button></span>
-            </div>
-            <hr>
-            <div class="thead">
-                <table><th><td width='50px'></td><td width='100px' align="center">Item</td><td width='130px'>Código</td><td width='350px'>Descrição</td></th></table>
-            </div>
+            <section>
+                <div class="buttons">
+                    <span id="spcodigo">Cód.: <input type="text" maxlength="5" name="cod" id="cod" size="5"></span>&nbsp;
+                    <span id="spprint"><button id='edit'>Editar</button></span>&nbsp;
+                    <span id="spprint"><button id="print">Imprimir</button></span>&nbsp;
+                    <span id="spsave"><button id='save'>Salvar</button></span>
+                </div>
+                <hr>
+                <div class="thead">
+                    <table><th><td width='50px'></td><td width='100px' align="center">ITEM</td><td width='130px'>CÓDIGO</td><td width='350px'>DESCRIÇÃO</td></th></table>
+                </div>
+            </section>
         </header>
-        <div id="#gamb"></div>
-        <div id="body">
-            <div>
-                <table id="lista"></table>
+        <main>
+            <div id="body">
+                <div>
+                    <table id="lista"></table>
+                </div>
             </div>
-        </div>
-    </section>
+        </main>
+        <!-- <div id="#gamb"></div> -->
     <script src="app.js"></script>
 </body>
 </html>

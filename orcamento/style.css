@@ -8,38 +8,63 @@
         font-size: 24px;
         font-weight: bold;
         color: rgb(87, 58, 33);
-        background-color: rgb(200, 182, 139);
+        background-color: #c8b68b;
     }
-    /*section#container{
+    .header{
         display: flex;
-        justify-content: start;
-    }*/
-    header{
-        padding: 30px 30px 10px 30px;
-        width: 800px;
+        flex-flow: row wrap;
+        padding: 10px;
+        justify-content: center;
+        /* max-width: 800px; */
     }
-   /* div#gamb{
-        display: none;
-        height: ;
-    }*/
-    button#print{
-        background-color: rgb(0, 163, 0);
+    section{
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        row-gap: 3px;
+    }
+    button{
+        margin: 0px 0;
         border-radius: 10px;
         color: white;
         padding: 5px;
+    }
+    button#print{
+        background-color: #3A7D44;
     }
     button#edit{
-        background-color: rgb(255, 234, 0);
-        border-radius: 10px;
-        color: white;
-        padding: 5px;
+        background-color: #B8336A;
+    }
+    button#save{
+        background-color: #1F5673;
     }
     div.top{
         height: 50px;
+        width: 400px;
         text-align: center;
     }
     div.thead{
-        padding: 30px 30px 0px 0px;
+        padding: 0px 0px 0px 0px;
+    }
+    .thead, .tbuttons, .input{
+        width: 100%;
+    }
+    .input, .buttons{
+        text-align: center;
+    }
+    div.diacli{
+        display: flex;
+        flex-flow: row wrap;
+        row-gap: 10px;
+        text-align: center;
+    }
+    div.itenstot{
+        padding: 10px;
+        display: flex;
+        flex-flow: row wrap;
+        row-gap: 10px;
+        width: 100%;
+        justify-content: center;
     }
     .dir{
         display: none;
@@ -49,11 +74,12 @@
     }
     div#qnt{
         display: inline-block;
-        width: 300px;
+        width: 220px;
     }
     div#tot{
         display: inline-block;
-        width: 250px;
+        width: 220px;
+        text-align: center;
     }
     div#divcliente{
         display: inline-block;
@@ -62,12 +88,11 @@
     }
     div#divdia{
         display: inline-block;
-        width: 300px;
+        width: 400px;
         text-align: "center";
     }
     div#body{
-        padding: 0 30px;
-        box-shadow: 0 0 2px white;
+        padding: 0;
     }
     div#lista{
         width: 800px;
@@ -77,14 +102,20 @@
         border-radius: 20px;
         width: 30px;
         color: white;
+        padding: 0px;
     }
     .del:hover{
         background-color: brown;
     }
     input{
         height: 40px;
-        background-color: rgb(254, 244, 231);
+        background-color: #F2EEE3;
         border-radius: 10px;
+    }
+    table{
+        /* border: 1px solid; */
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 
@@ -97,8 +128,12 @@
         padding: 0px;
     }
     header{
+        display: block;
         padding: 1px;
         font-size: 18px;
+        position: fixed;
+        top: 0;
+        height: 0px;
     }
     table{
         font-size: 13px;
@@ -107,7 +142,6 @@
         display: none;
     }
     hr {
-        display: block;
         height: 1px;
         background: transparent;
         width: 100%;
@@ -122,7 +156,7 @@
     }
     div#qnt{
         display: inline-block;
-        width: 100px;
+        width: 150px;
     }
     div#tot{
         display: inline-block;
@@ -130,18 +164,13 @@
     }
     div#divcliente{
         display: inline-block;
-        width: 400px;
+        width: 350px;
         text-align: "center";
     }
     div#divdia{
         display: inline-block;
-        width: 300px;
+        width: 200px;
         text-align: "center";
-    }
-    header{
-        position: fixed;
-        top: 0;
-        height: 0px;
     }
 
     div.top{
@@ -153,6 +182,9 @@
     }
     div.input{
         display: none;
+    }
+    div.gamb{
+        height: 100px;
     }
     .inv{
         display: none;
