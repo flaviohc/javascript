@@ -5,10 +5,8 @@
         padding: 0;
         margin: 0;
         font-family: Arial, Helvetica, sans-serif;
-        font-weight: bold;
         color: rgb(87, 58, 33);
         background-color: #c8b68b;
-        font-size: 16px;
     }
     .header{
         display: flex;
@@ -16,8 +14,10 @@
         padding: 5px 0px 0px 0px;
         justify-content: center;
         width: 100%;
-        box-shadow: 0 0 2px black;
-        /* max-width: 800px; */
+        /* box-shadow: 0 0 2px black; */
+    }
+    h3{
+        text-align: center;
     }
     .preco{
         display: none;
@@ -55,11 +55,12 @@
     button#save{
         background-color: #1F5673;
     }
-    div.top{
+    /* div.top{
         padding-bottom: 5px;
-        width: 350px;
+        width: 100%;
         text-align: center;
-    }
+        box-shadow: 0 0 2px black;
+    } */
     div.thead{
         padding: 0px 0px 0px 0px;
         display: none;

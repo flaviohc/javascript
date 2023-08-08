@@ -1,24 +1,34 @@
+// document.querySelector("#dia").value=;
+var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+today = yyyy + '-' + mm + '-' + dd;
+
+let dia = document.querySelector("#dia");
+document.querySelector("#dia").value=today;
+
 let quant = document.querySelector("#qnt");
-let hoje = document.querySelector("#dia");
 let total = document.querySelector("#total");
 let cliente = document.querySelector("#cliente");
 let orc = document.querySelector("#orc");
 let soma = qnt = npag = pag = valitem = 0;
 const pecaspag = 50;
-let html = sumText = texto = tipo = mat = dia = "";
+let html = sumText = texto = tipo = mat = "";
 
 //previne atualização acidental
-window.onbeforeunload = function(){
-    if(confirm("Deseja atualizar a página?")==false){
-        return "";
-    }
-}
+// window.onbeforeunload = function(){
+//     if(confirm("Deseja atualizar a página?")==false){
+//         return "";
+//     }
+// }
 
 document.querySelector("#edit").addEventListener('click',()=>{
     editar();
 })
+
 document.querySelector("#save").addEventListener('click',()=>{
-    if(hoje.value!="" && cliente.value.trim()!="" && orc.value.trim()!=""){
+    if(dia.value!="" && cliente.value.trim()!=""){
         salvar();
     }else{
         alert("Favor preencher todos os campos.");
@@ -143,17 +153,16 @@ function ativaImprimir(){
 }
 
 function salvar(){
-    dia = hoje.value.slice(8,10)+"/"+hoje.value.slice(5,7)+"/"+hoje.value.slice(0,4);
-    // cliente=document.querySelector("#cliente").value;
+    document.querySelector("#spsave").style.display= "none";
+    dia = dia.value.slice(8,10)+"/"+dia.value.slice(5,7)+"/"+dia.value.slice(0,4);
     document.querySelector("#divcliente").textContent="Cliente: "+cliente.value;
     document.querySelector("#divdia").textContent="Data: "+dia;
-    document.querySelector("#porc").innerHTML= "<a href='#' onclick='editar()' id='edit'>Orçamento: "+orc.value+"</a>";
+    document.querySelector("#titulo").innerHTML= "<a href='#' onclick='editar()' id='edit'>Orçamento</a>";
     document.querySelector("#qnt").style.display= "inline-block";
     document.querySelector("#tot").style.display= "inline-block";
     document.querySelector(".thead").style.display= "block";
     document.querySelector("#spprint").style.display= "block";
     document.querySelector("#spcodigo").style.display= "block";
-    document.querySelector("#spsave").style.display= "none";
     document.querySelectorAll('[id^="rm"]').forEach(element => {
         element.style.display="block";
     });;
@@ -161,12 +170,11 @@ function salvar(){
 
 function editar(){
     document.querySelector("#divcliente").innerHTML='<label for="cliente">Cliente: <input type="text" id="cliente" size="17" value="'+cliente.value+'"></label></label>';
-    document.querySelector("#divdia").innerHTML='<label for="dia">Data: <input type="date" id="dia" value='+hoje.value+'></label>';
-    document.querySelector("#porc").innerHTML= 'Orçamento: <input type="text" id="orc" size="5" value='+orc.value+' autocomplete="off">';
+    document.querySelector("#divdia").innerHTML='<label for="dia">Data: <input type="date" id="dia" value='+dia.value+'></label>';
+    document.querySelector("#spsave").style.display= "block";
     document.querySelector("#spedit").style.display= "none";
     document.querySelector("#spprint").style.display= "none";
     document.querySelector("#spcodigo").style.display= "none";
-    document.querySelector("#spsave").style.display= "block";
     document.querySelectorAll('[id^="rm"]').forEach(element => {
         element.style.display="none"
     });;
