@@ -14,7 +14,8 @@ let cliente = document.querySelector("#cliente");
 let orc = document.querySelector("#orc");
 let soma = qnt = npag = pag = valitem = 0;
 const pecaspag = 50;
-let html = sumText = texto = tipo = mat = "";
+let html = sumText = texto = tipo = mat = atrib = but = "";
+let listapronta = [];
 
 //previne atualização acidental
 window.onbeforeunload = function(){
@@ -36,23 +37,29 @@ document.querySelector("#save").addEventListener('click',()=>{
 })
 let pecas=[];
 
-ativaAdicionar();
-ativaImprimir();
+// ativaAdicionar();
+// ativaImprimir();
 
 //Adicionar
-function ativaAdicionar(){
-    document.querySelector("#cod").addEventListener('keypress',(e)=>{
-        text = document.querySelector("#cod").value;
-        if(e.key==='Enter' && text.length>=4){
-            pecas.unshift(text);
-            listar();
-            document.querySelector("#cod").value="";
-        }
-    })
-}
+document.querySelector("#cod").addEventListener('keypress',(e)=>{
+    text = document.querySelector("#cod").value;
+    if(e.key==='Enter' && text.length>=4){
+        let item = [text,true];
+        pecas.unshift(item);
+        listar();
+        document.querySelector("#cod").value="";
+    }
+})
 
 function remove(id){
-    pecas.splice(id,1);
+    // pecas.splice(id,1);
+    pecas[id][1]=false;
+    listar();
+    // console.log(pecas);
+}
+function restaura(id){
+    // pecas.splice(id,1);
+    pecas[id][1]=true;
     listar();
     // console.log(pecas);
 }
@@ -63,12 +70,21 @@ function listar(){
     pag=1;
     npag = Math.ceil(pecas.length/pecaspag);
     pecas.forEach((element, index) => {
-        texto = descricao(element);
-        valitem = valor(element);
+        texto = descricao(element[0]);
+        valitem = valor(element[0]);
+        // console.log(element[1]);
+
+        if(element[1] == false){
+            atrib = "excluido";
+            but = "<td class='tddel'><button id='rm"+index+"' class='res' onclick='restaura("+index+")'> < </button></td>";;
+        }else{
+            atrib = "";
+            but = "<td class='tddel'><button id='rm"+index+"' class='del' onclick='remove("+index+")'> x </button></td>";
+        }
         if(index==0){
             html+="<tr class='altquebra'><td></td><td></td><td></td><td></td><td></td><td class='preco'></td></tr>";
         }
-        html += "<tr id='"+index+"'><td class='tddel'><button id='rm"+index+"' class='del' onclick='remove("+index+")'> x </button></td><td class='inv tditem' align='center'>"+(pecas.length-index)+"</td><td class='dir tditem' align='center'>"+(index+1)+"</td><td class='tdcod'>"+element+".90</td><td class='tddesc'>"+texto+"</td><td class='tdpreco'>"+valitem+"</td></tr>";
+        html += "<tr id='"+index+"' class='"+atrib+"'>"+but+"<td class='inv tditem' align='center'>"+(pecas.length-index)+"</td><td class='dir tditem' align='center'>"+(index+1)+"</td><td class='tdcod'>"+element[0]+".90</td><td class='tddesc'>"+texto+"</td><td class='tdpreco'>"+valitem+"</td></tr>";
 
         if(((index+1)%pecaspag==0 && index!=0) || index>=(pecas.length-1)){
             html+="<tr><td></td><td></td><td></td><td></td><td align='right' class='tdpreco'>página "+pag+"/"+npag+"</td></tr>"
@@ -83,10 +99,13 @@ function listar(){
 }
 
 function calcular(){
-    qnt = pecas.length;
+    qnt = 0;
     pecas.forEach(element => {
-        preco = parseFloat(element.slice(2));
-        soma += preco;
+        if(element[1]==true){
+            preco = parseFloat(element[0].slice(2));
+            soma += preco;
+            qnt++;
+        }
     })
     soma += 0.9*qnt;
     sumText = soma.toFixed(2);
@@ -143,14 +162,12 @@ function descricao(e){
     return tipo+mat;
 }
 
-function ativaImprimir(){
-    document.querySelector('#print').addEventListener('click',()=>{
-    
-        pecas.sort();
-        listar();
-        window.print();
-    })
-}
+document.querySelector('#print').addEventListener('click',()=>{
+    excluiRiscado();
+    pecas.sort();
+    listar();
+    window.print();
+})
 
 function salvar(){
     // console.log(dia.value);
@@ -181,8 +198,17 @@ function editar(){
         element.style.display="none"
     });;
 
-    ativaAdicionar();
-    ativaImprimir();
+    // ativaAdicionar();
+    // ativaImprimir();
+}
+function excluiRiscado(){
+    listapronta = [];
+    pecas.forEach(e => {
+        if(e[1]==true){
+            listapronta.push(e);
+        }
+    })
+    pecas = listapronta;
 }
 
 /*let pecas=['1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234','1234'];*/
