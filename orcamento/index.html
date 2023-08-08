@@ -10,7 +10,7 @@
 <body>
         <header>
             <div class="top">
-                <h3 id="titulo">Orçamento</h3>
+                <h3 id="titulo">Sistema Flavio Caetano</h3>
             </div>
             <div class="header">
                     <!-- <input type="text" id="orc" size="5" autocomplete="off"> -->
@@ -20,6 +20,11 @@
                     <div id="divdia"><label for="dia">Data: <input type="date" id="dia"></label></div>
                     <span id="spsave"><button id="save">Salvar</button></span>
                 </div>
+                <div class="inicio">
+                    <div id="spnovo"><button id="novo">Novo Orçamento</button></div>
+                    <div id="spdev"><button id="dev">Devolução</button></div>
+                    <div id="sprestaurar"><input type="text" id="codjson">&nbsp;<button id="restaurar">Restaurar</button></div>
+                </div>
                 <div class="itenstot">
                     <div id="qnt">Quant.: 0 peças</div>
                     <div id="tot">Total: R$ <span id="total">0</span></div>
@@ -27,9 +32,14 @@
             </div>
             <section>
                 <div class="buttons">
-                    <div id="spcodigo">Cód.: <input type="text" maxlength="5" name="cod" id="cod" size="5"></div>
-                    <div id="spedit"><button id='edit'>Editar</button></div>
+                    <div id="spcodigo">Cód.: 
+                        <input type="text" maxlength="5" name="cod" id="cod" size="10">
+                        <input type="text" maxlength="5" name="cod" id="coddev" size="10">
+                    </div>
+                    <div id="spcopy"><button id="copy">Copiar</button></div>
                     <div id="spprint"><button id="print">Imprimir</button></div>
+                    <!-- <div id="spprint"><button id="print">Imprimir</button></div> -->
+                    <input type="text" value="" id="hid">
                 </div>
                 <hr>
                 <div class="thead">
