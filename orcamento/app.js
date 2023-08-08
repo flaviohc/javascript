@@ -6,7 +6,7 @@ var yyyy = today.getFullYear();
 today = yyyy + '-' + mm + '-' + dd;
 
 let dia = document.querySelector("#dia");
-document.querySelector("#dia").value=today;
+dia.value=today;
 
 let quant = document.querySelector("#qnt");
 let total = document.querySelector("#total");
@@ -17,11 +17,11 @@ const pecaspag = 50;
 let html = sumText = texto = tipo = mat = "";
 
 //previne atualização acidental
-// window.onbeforeunload = function(){
-//     if(confirm("Deseja atualizar a página?")==false){
-//         return "";
-//     }
-// }
+window.onbeforeunload = function(){
+    if(confirm("Deseja atualizar a página?")==false){
+        return "";
+    }
+}
 
 document.querySelector("#edit").addEventListener('click',()=>{
     editar();
@@ -54,7 +54,7 @@ function ativaAdicionar(){
 function remove(id){
     pecas.splice(id,1);
     listar();
-    console.log(pecas);
+    // console.log(pecas);
 }
 
 function listar(){
@@ -153,10 +153,12 @@ function ativaImprimir(){
 }
 
 function salvar(){
-    document.querySelector("#spsave").style.display= "none";
-    dia = dia.value.slice(8,10)+"/"+dia.value.slice(5,7)+"/"+dia.value.slice(0,4);
+    // console.log(dia.value);
+    let dia = document.querySelector("#dia");
+    document.querySelector("#save").style.display= "none";
+    let diaset = dia.value.slice(8,10)+"/"+dia.value.slice(5,7)+"/"+dia.value.slice(0,4);
     document.querySelector("#divcliente").textContent="Cliente: "+cliente.value;
-    document.querySelector("#divdia").textContent="Data: "+dia;
+    document.querySelector("#divdia").textContent="Data: " + diaset;
     document.querySelector("#titulo").innerHTML= "<a href='#' onclick='editar()' id='edit'>Orçamento</a>";
     document.querySelector("#qnt").style.display= "inline-block";
     document.querySelector("#tot").style.display= "inline-block";
@@ -171,7 +173,7 @@ function salvar(){
 function editar(){
     document.querySelector("#divcliente").innerHTML='<label for="cliente">Cliente: <input type="text" id="cliente" size="17" value="'+cliente.value+'"></label></label>';
     document.querySelector("#divdia").innerHTML='<label for="dia">Data: <input type="date" id="dia" value='+dia.value+'></label>';
-    document.querySelector("#spsave").style.display= "block";
+    document.querySelector("#save").style.display= "block";
     document.querySelector("#spedit").style.display= "none";
     document.querySelector("#spprint").style.display= "none";
     document.querySelector("#spcodigo").style.display= "none";

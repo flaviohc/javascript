@@ -214,6 +214,9 @@
         top: 0;
         height: 0px;
     }
+    .header{
+        padding: 0 50px;
+    }
     table{
         font-size: 13px;
     }
@@ -244,7 +247,7 @@
     }
     div#divcliente{
         display: inline-block;
-        width: 500px;
+        width: 400px;
         text-align: "center";
     }
     div#divdia{
