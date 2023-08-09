@@ -46,10 +46,13 @@ cliente.addEventListener('keypress',(e)=>{
 let pecas=[];
 
 //Adicionar
-cod.addEventListener('keydown',(e)=>{
+cod.addEventListener('keypress',(e)=>{
+    text = document.querySelector("#cod").value;
+    // var senum = onlyNumberKey(e);
+    // if(senum == false){
+    //     document.querySelector("#cod").value = text.slice(0,-1);
+    // }
     if(e.key === 'Enter'){
-        text = document.querySelector("#cod").value;
-
         //Verifica se ha apenas números no campo
         isnum = false;
         isnum = /^\d+$/.test(text);
@@ -65,9 +68,12 @@ cod.addEventListener('keydown',(e)=>{
                 listar();
             }else{
                 alert("Favor digitar 3 ou mais números.");
+                document.querySelector("#cod").focus();
             }
         }else{
             alert("Favor digitar apenas números.");
+            document.querySelector("#cod").value="";
+            document.querySelector("#cod").focus();
         }
     }
 })
@@ -92,14 +98,14 @@ function codremover(){
     }
 }
 
-function onlyNumberKey(evt) {
+// function onlyNumberKey(evt) {
              
-    // Only ASCII character in that range allowed
-    var ASCIICode = (evt.which) ? evt.which : evt.keyCode
-    if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
-        return false;
-    return true;
-}
+//     // Only ASCII character in that range allowed
+//     var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+//     if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+//         return false;
+//     return true;
+// }
 
 function checkNumber(event){
 
