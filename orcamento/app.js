@@ -20,6 +20,7 @@ let html = sumText = texto = tipo = mat = atrib = but = codjson = "";
 let listapronta = [];
 let listajson = [];
 let textojson = {};
+let devolucao = false;
 
 //previne atualização acidental
 window.onbeforeunload = function(){
@@ -54,10 +55,33 @@ let pecas=[];
 cod.addEventListener('keypress',(e)=>{
     text = document.querySelector("#cod").value;
     if(e.key==='Enter' && text.length>=3){
+        if(devolucao==false){
+            adicionar();
+        }else{
+            codremover();
+        }
+        cod.value="";
+        listar();
+    }
+
+    function adicionar(){
         let item = [text,true];
         pecas.unshift(item);
-        listar();
-        cod.value="";
+    }
+    
+    function codremover(){
+        let index = -1;
+        for(let i = 0; i<(pecas.length); i++){
+            if(pecas[i].indexOf(text)!= -1 && pecas[i][1]==true){
+                index = i;
+                break;
+            }
+        }
+        if(index!=-1){
+            pecas[index][1]=false;
+        }else{
+            alert("Peça inexistente!");
+        }
     }
 })
 
@@ -234,6 +258,7 @@ function copiar(){
 }
 
 function criarJson(){
+    listajson = [];
     excluiRiscado();
     pecas.forEach(e => listajson.push(e[0]))
     textojson.nome = cliente;
@@ -260,20 +285,19 @@ function novadev(){
 function restaurar(){
     codjson = document.querySelector("#codjson").value;
     textojson = JSON.parse(codjson);
-    //console.log(textojson);
     textojson.itens.forEach(e=>pecas.push([e,true]));
+    pecas.sort();
     document.querySelector("#divcliente").textContent = "Cliente: "+ textojson.nome;
     document.querySelector("#divdia").textContent = "Data: " + textojson.dia;
     document.querySelector(".inicio").style.display = "none";
     document.querySelector(".thead").style.display = "block";
-    document.querySelector("#qnt").style.display = "block";
-    document.querySelector("#tot").style.display = "block";
-    document.querySelector("#divdia").style.display = "block";
-    document.querySelector("#divcliente").style.display = "block";
+    document.querySelector("#qnt").style.display = "inline-block";
+    document.querySelector("#tot").style.display = "inline-block";
+    document.querySelector("#divdia").style.display = "inline-block";
+    document.querySelector("#divcliente").style.display = "inline-block";
     document.querySelector("#spcodigo").style.display = "block";
     document.querySelector("#spprint").style.display = "block";
-
-    // document.querySelector(".itenstot").style.display = "block";
+    devolucao = true;
     listar();
 }
 
