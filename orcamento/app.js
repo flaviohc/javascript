@@ -47,15 +47,27 @@ let pecas=[];
 
 //Adicionar
 cod.addEventListener('keydown',(e)=>{
-    text = document.querySelector("#cod").value;
-    if(e.key==='Enter' && text.length>=3){
-        if(devolucao==false){
-            adicionar();
+    if(e.key === 'Enter'){
+        text = document.querySelector("#cod").value;
+
+        //Verifica se ha apenas números no campo
+        let isnum = /^\d+$/.test(text);
+
+        if(isnum){
+            if(text.length>=3){
+                if(devolucao==false){
+                    adicionar();
+                }else{
+                    codremover();
+                }
+                cod.value="";
+                listar();
+            }else{
+                alert("Favor digitar 3 ou mais números.")
+            }
         }else{
-            codremover();
+            alert("Favor digitar apenas números.")
         }
-        cod.value="";
-        listar();
     }
 })
 
@@ -297,6 +309,7 @@ function novadev(){
     document.querySelector("#sprestaurar").style.display="block";
     document.querySelector("#spdev").style.display="none";
     document.querySelector("#spnovo").style.display="none";
+    document.querySelector("#codjson").focus();
 }
 
 function restaurar(){
