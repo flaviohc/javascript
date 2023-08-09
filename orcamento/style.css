@@ -145,6 +145,12 @@
     div#lista{
         width: 800px;
     }
+    #alert{
+        display: none;
+        text-align: center;
+        color: red;
+        font-style: italic;
+    }
     .del{
         background-color: #E9190F;
         border-radius: 20px;
@@ -332,7 +338,7 @@
         width: 200px;
     }
     .excluido{
-        display: none;
+        text-decoration: line-through;
     }
     td.tdpag{
         display: block;

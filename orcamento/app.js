@@ -16,7 +16,7 @@ const cod = document.querySelector("#cod");
 const spcopy = document.querySelector("#spcopy");
 let soma = qnt = npag = pag = valitem = 0;
 const pecaspag = 50;
-let html = sumText = texto = tipo = mat = atrib = but = codjson = "";
+let html = sumText = texto = tipo = mat = atrib = but = codjson = diaset = "";
 let listapronta = [];
 let listajson = [];
 let textojson = {};
@@ -88,12 +88,14 @@ cod.addEventListener('keypress',(e)=>{
 function remove(id){
     // pecas.splice(id,1);
     pecas[id][1]=false;
+    cod.focus();
     listar();
     // console.log(pecas);
 }
 function volta(id){
     // pecas.splice(id,1);
     pecas[id][1]=true;
+    cod.focus();
     listar();
     // console.log(pecas);
 }
@@ -153,6 +155,9 @@ function valor(e){
 
 function descricao(e){
     switch(e[0]){
+        case "0":
+            tipo = "Conjunto";
+        break;
         case "1":
             tipo = "Corrente";
         break;
@@ -197,17 +202,18 @@ function descricao(e){
 }
 
 document.querySelector('#print').addEventListener('click',()=>{
-    excluiRiscado();
+    if(devolucao==false){excluiRiscado()}
     pecas.sort();
     listar();
     window.print();
+    cod.focus();
 })
 
 function salvar(){
     // console.log(dia.value);
     let dia = document.querySelector("#dia");
     document.querySelector("#save").style.display= "none";
-    let diaset = dia.value.slice(8,10)+"/"+dia.value.slice(5,7)+"/"+dia.value.slice(0,4);
+    diaset = dia.value.slice(8,10)+"/"+dia.value.slice(5,7)+"/"+dia.value.slice(0,4);
     cliente = document.querySelector("#cliente").value;
     document.querySelector("#divcliente").textContent="Cliente: "+ cliente;
     document.querySelector("#divdia").textContent="Data: " + diaset;
@@ -262,7 +268,7 @@ function criarJson(){
     excluiRiscado();
     pecas.forEach(e => listajson.push(e[0]))
     textojson.nome = cliente;
-    textojson.dia = dia.value;
+    textojson.dia = diaset;
     textojson.itens = listajson;
     hid.value = JSON.stringify(textojson);
 }
@@ -298,6 +304,7 @@ function restaurar(){
     document.querySelector("#spcodigo").style.display = "block";
     document.querySelector("#spprint").style.display = "block";
     devolucao = true;
+    cod.focus();
     listar();
 }
 
@@ -305,9 +312,16 @@ document.querySelector("#restaurar").addEventListener('click',()=>{
     restaurar();
 })
 
+document.querySelector("#codjson").addEventListener('keypress', 
+    (e)=>{
+        if(e.key==='Enter') restaurar();
+    }
+)
+
 document.querySelector("#copy").addEventListener('click', ()=>{
     criarJson();
     copiar();
+    cod.focus();
 })
 
 //{"nome":"eqweqwe","dia":"2023-08-08","itens":["31231","31231","31231","31231"]}
