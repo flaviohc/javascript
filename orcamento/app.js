@@ -19,7 +19,7 @@ let html = sumText = texto = tipo = mat = atrib = but = codjson = diaset = "";
 let listapronta = [];
 let listajson = [];
 let textojson = {};
-let devolucao = false;
+let devolucao = isnum = false;
 
 //Previne atualização acidental
 window.addEventListener('beforeunload', (event) => {
@@ -51,7 +51,8 @@ cod.addEventListener('keydown',(e)=>{
         text = document.querySelector("#cod").value;
 
         //Verifica se ha apenas números no campo
-        let isnum = /^\d+$/.test(text);
+        isnum = false;
+        isnum = /^\d+$/.test(text);
 
         if(isnum){
             if(text.length>=3){
@@ -63,10 +64,10 @@ cod.addEventListener('keydown',(e)=>{
                 cod.value="";
                 listar();
             }else{
-                alert("Favor digitar 3 ou mais números.")
+                alert("Favor digitar 3 ou mais números.");
             }
         }else{
-            alert("Favor digitar apenas números.")
+            alert("Favor digitar apenas números.");
         }
     }
 })
