@@ -46,7 +46,7 @@ cliente.addEventListener('keypress',(e)=>{
 let pecas=[];
 
 //Adicionar
-cod.addEventListener('keypress',(e)=>{
+cod.addEventListener('keydown',(e)=>{
     text = document.querySelector("#cod").value;
     // var senum = onlyNumberKey(e);
     // if(senum == false){
@@ -78,6 +78,13 @@ cod.addEventListener('keypress',(e)=>{
     }
 })
 
+cod.addEventListener('keyup',(e)=>{
+    var senum = onlyNumberKey(e);
+    if(senum == false){
+        document.querySelector("#cod").value = text.slice(0,-1);
+    }
+})
+
 function adicionar(){
     let item = [text,true];
     pecas.unshift(item);
@@ -98,14 +105,14 @@ function codremover(){
     }
 }
 
-// function onlyNumberKey(evt) {
+function onlyNumberKey(evt) {
              
-//     // Only ASCII character in that range allowed
-//     var ASCIICode = (evt.which) ? evt.which : evt.keyCode
-//     if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
-//         return false;
-//     return true;
-// }
+    // Only ASCII character in that range allowed
+    var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+    if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+        return false;
+    return true;
+}
 
 function checkNumber(event){
 
