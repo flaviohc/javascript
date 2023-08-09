@@ -15,7 +15,7 @@
             <div class="header">
                     <!-- <input type="text" id="orc" size="5" autocomplete="off"> -->
                 <div class="diacli">
-                    <div id="divcliente"><label for="cliente">Cliente: <input type="text" id="cliente"></label></div>
+                    <div id="divcliente"><label for="cliente">Cliente: <input type="text" id="cliente" required="required"></label></div>
 
                     <div id="divdia"><label for="dia">Data: <input type="date" id="dia"></label></div>
                     <span id="spsave"><button id="save">Salvar</button></span>
@@ -23,7 +23,7 @@
                 <div class="inicio">
                     <div id="spnovo"><button id="novo">Novo Orçamento</button></div>
                     <div id="spdev"><button id="dev">Devolução</button></div>
-                    <div id="sprestaurar"><input type="text" id="codjson">&nbsp;<button id="restaurar">Restaurar</button></div>
+                    <div id="sprestaurar"><input type="text" id="codjson" required="required">&nbsp;<button id="restaurar">Restaurar</button></div>
                 </div>
                 <div class="itenstot">
                     <div id="qnt">Quant.: 0 peças</div>
@@ -33,7 +33,7 @@
             <section>
                 <div class="buttons">
                     <div id="spcodigo">Cód.: 
-                        <input type="text" maxlength="5" name="cod" id="cod" size="10">
+                        <input type="text" maxlength="5" name="cod" id="cod" size="5" onkeypress="return onlyNumberKey(event)">
                     </div>
                     <div id="spcopy"><button id="copy">Copiar</button></div>
                     <div id="spprint"><button id="print">Imprimir</button></div>

@@ -10,7 +10,6 @@ dia.value=today;
 
 const quant = document.querySelector("#qnt");
 const total = document.querySelector("#total");
-// let cliente = document.querySelector("#cliente");
 const orc = document.querySelector("#orc");
 const cod = document.querySelector("#cod");
 const spcopy = document.querySelector("#spcopy");
@@ -22,12 +21,10 @@ let listajson = [];
 let textojson = {};
 let devolucao = false;
 
-//previne atualização acidental
-window.onbeforeunload = function(){
-    if(confirm("Deseja atualizar a página?")==false){
-        return "";
-    }
-}
+//Previne atualização acidental
+window.addEventListener('beforeunload', (event) => {
+    event.returnValue = 'Deseja atualizar a pagina? Os dados serão perdidos.';
+});
 
 document.querySelector("#novo").addEventListener('click',()=>{
     novo();
@@ -48,11 +45,8 @@ cliente.addEventListener('keypress',(e)=>{
 
 let pecas=[];
 
-// ativaAdicionar();
-// ativaImprimir();
-
 //Adicionar
-cod.addEventListener('keypress',(e)=>{
+cod.addEventListener('keydown',(e)=>{
     text = document.querySelector("#cod").value;
     if(e.key==='Enter' && text.length>=3){
         if(devolucao==false){
@@ -63,41 +57,57 @@ cod.addEventListener('keypress',(e)=>{
         cod.value="";
         listar();
     }
-
-    function adicionar(){
-        let item = [text,true];
-        pecas.unshift(item);
-    }
-    
-    function codremover(){
-        let index = -1;
-        for(let i = 0; i<(pecas.length); i++){
-            if(pecas[i].indexOf(text)!= -1 && pecas[i][1]==true){
-                index = i;
-                break;
-            }
-        }
-        if(index!=-1){
-            pecas[index][1]=false;
-        }else{
-            alert("Peça inexistente!");
-        }
-    }
 })
 
+function adicionar(){
+    let item = [text,true];
+    pecas.unshift(item);
+}
+
+function codremover(){
+    let index = -1;
+    for(let i = 0; i<(pecas.length); i++){
+        if(pecas[i].indexOf(text)!= -1 && pecas[i][1]==true){
+            index = i;
+            break;
+        }
+    }
+    if(index!=-1){
+        pecas[index][1]=false;
+    }else{
+        alert("Peça inexistente!");
+    }
+}
+
+function onlyNumberKey(evt) {
+             
+    // Only ASCII character in that range allowed
+    var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+    if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+        return false;
+    return true;
+}
+
+function checkNumber(event){
+
+    var aCode = event.which ? event.which : event.keyCode;
+    
+    if (aCode > 31 && (aCode < 48 || aCode > 57)) return false;
+    
+    return true;
+    
+}
+
+
 function remove(id){
-    // pecas.splice(id,1);
     pecas[id][1]=false;
     cod.focus();
     listar();
-    // console.log(pecas);
 }
 function volta(id){
-    // pecas.splice(id,1);
     pecas[id][1]=true;
     cod.focus();
     listar();
-    // console.log(pecas);
 }
 
 function listar(){
@@ -210,7 +220,6 @@ document.querySelector('#print').addEventListener('click',()=>{
 })
 
 function salvar(){
-    // console.log(dia.value);
     let dia = document.querySelector("#dia");
     document.querySelector("#save").style.display= "none";
     diaset = dia.value.slice(8,10)+"/"+dia.value.slice(5,7)+"/"+dia.value.slice(0,4);
@@ -223,6 +232,7 @@ function salvar(){
     document.querySelector(".thead").style.display= "block";
     document.querySelector("#spprint").style.display= "block";
     document.querySelector("#spcodigo").style.display= "block";
+    document.querySelector("#cod").focus();
     spcopy.style.display="block";
     document.querySelectorAll('[id^="rm"]').forEach(element => {
         element.style.display="block";
@@ -279,6 +289,7 @@ function novo(){
     document.querySelector("#divdia").style.display="inline-block";
     document.querySelector("#spsave").style.display="inline-block";
     document.querySelector(".inicio").style.display="none";
+    document.querySelector("#cliente").focus();
 }
 
 function novadev(){
