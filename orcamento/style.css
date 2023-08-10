@@ -55,23 +55,44 @@
     button#print{
         background-color: #3A7D44;
     }
+    button#print:hover{
+        background-color: #1e4022;
+    }
     button#edit{
         background-color: #B8336A;
+    }
+    button#edit:hover{
+        background-color: #691e3d;
     }
     button#save{
         background-color: #1F5673;
     }
+    button#save:hover{
+        background-color: #0d2430;
+    }
     button#copy{
         background-color: #B8336A;
+    }
+    button#copy:hover{
+        background-color: #571833;
     }
     button#novo{
         background-color: #3A7D44;
     }
+    button#novo:hover{
+        background-color: #1c3d21;
+    }
     button#restaurar{
         background-color: #1F5673;
     }
+    button#restaurar:hover{
+        background-color: #0f2835;
+    }
     button#dev{
         background-color: #B8336A;
+    }
+    button#dev:hover{
+        background-color: #551932;
     }
     #spcodigo{
         text-align: center;
@@ -159,11 +180,14 @@
         padding: 0px;
     }
     .res{
-        background-color: #0f21e9;
+        background-color: #4955e0;
         border-radius: 20px;
         width: 30px;
         color: white;
         padding: 0px;
+    }
+    .res:hover{
+        background-color: #191f64;
     }
     .del:hover{
         background-color: brown;
@@ -204,7 +228,7 @@
     #spcopy{
         display:none;
     }
-    
+
     /* Chrome e outros
     input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
