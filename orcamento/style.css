@@ -60,10 +60,10 @@
         padding: 5px;
     }
     button#print{
-        background-color: #3A7D44;
+        background-color: #B8336A;
     }
     button#print:hover{
-        background-color: #1e4022;
+        background-color: #691e3d;
     }
     button#edit{
         background-color: #B8336A;
@@ -78,10 +78,10 @@
         background-color: #0d2430;
     }
     button#copy{
-        background-color: #B8336A;
+        background-color: #1F5673;
     }
     button#copy:hover{
-        background-color: #571833;
+        background-color: #0d2430;
     }
     button#novo{
         background-color: #3A7D44;
