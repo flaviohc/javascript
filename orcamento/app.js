@@ -39,6 +39,38 @@ document.querySelector("#save").addEventListener('click',()=>{
     }
 })
 
+function whatsapp(){
+    document.querySelector("#wpp").addEventListener('click', copiawhatsapp)
+}
+
+function copiawhatsapp(){
+    let desc = "";
+    let r = 1;
+    let esp = "&nbsp;";
+    let html = "";
+    let pecaswpp = pecas;
+    let calc = calcular();
+    // let qnt = document.querySelector("#qnt");
+    // let tot = document.querySelector("#tot");
+
+    pecaswpp.sort();
+
+    html += "Nome: "+ cliente +"&#10;";
+    html += "Data: "+ diaset +"&#10;";
+    html += "Qnt.: "+calc["qnt"]+"&#10;Total: "+calc["tot"]+"&#10;&#10;";
+    html += "Cod.          Descrição&#10;";
+
+    pecaswpp.forEach((e)=>{
+        if(e[1]==true){
+            r = 2*(6-e[0].length);
+            desc = descricao(e[0]);
+            html += e[0].slice(0,2)+"."+e[0].slice(2)+".90"+esp.repeat(r)+desc+"&#10;";
+        }
+    })
+    document.querySelector("#hidarea").innerHTML=html;
+    copiar("#hidarea");
+}
+
 cliente.addEventListener('keypress',(e)=>{
     if(e.key==='Enter' && cliente.value.trim()!="") salvar();
 })
@@ -171,7 +203,7 @@ function listar(){
 }
 
 function calcular(){
-    qnt = 0;
+    qnt = soma = sumText = 0;
     pecas.forEach(element => {
         if(element[1]==true){
             preco = parseFloat(element[0].slice(2));
@@ -184,7 +216,10 @@ function calcular(){
 
     quant.textContent = "Qnt.: " + qnt + " peças";
     total.textContent = sumText;
+
+    return {qnt:qnt,tot:sumText}
 }
+
 function valor(e){
     return (e.slice(2)+".90");
 }
@@ -260,9 +295,13 @@ function salvar(){
     document.querySelector("#spcodigo").style.display= "block";
     document.querySelector("#cod").focus();
     spcopy.style.display="block";
+
+    document.querySelector("#wpp").style.display= "block";
+    whatsapp();
+
     document.querySelectorAll('[id^="rm"]').forEach(element => {
         element.style.display="block";
-    });;
+    });
 }
 
 function editar(){
@@ -291,13 +330,23 @@ function excluiRiscado(){
 }
 
 // salvando em json no clipboard
-function copiar(){
-    var hid = document.querySelector("#hid");
+function copiar(text){
+    let timeout;
+    var hid = document.querySelector(text);
     hid.select();
     hid.setSelectionRange(0, 99999); // For mobile devices
     navigator.clipboard.writeText(hid.value);
-    // alert("Copied the text: " + hid.value);
+    alertar();
 }
+
+function alertar(){
+    document.querySelector("#alerta").style.display="block";
+    const myTimeout = setTimeout(hide, 2000);
+    function hide(){
+        document.querySelector("#alerta").style.display="none";
+    }
+}
+
 
 function criarJson(){
     listajson = [];
@@ -358,7 +407,7 @@ document.querySelector("#codjson").addEventListener('keypress',
 
 document.querySelector("#copy").addEventListener('click', ()=>{
     criarJson();
-    copiar();
+    copiar("#hid");
     cod.focus();
 })
 

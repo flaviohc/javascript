@@ -37,8 +37,15 @@
     .preco{
         display: none;
     }
-    #hid, #spedit, #spedit, #spcodigo, #spprint, #spsave, #sprestaurar, #coddev{
+    #hid, #spedit, #spedit, #spcodigo, #spprint, #spsave, #sprestaurar, #coddev, #hidarea, #wpp{
         display:none;
+    }
+    img{
+        width: 40px;
+        height: 40px;
+        border-radius: 5px;
+        cursor: pointer;
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
     }
     section{
         display: flex;
@@ -166,10 +173,10 @@
     div#lista{
         width: 800px;
     }
-    #alert{
+    #alerta{
         display: none;
         text-align: center;
-        color: red;
+        color: rgb(122, 0, 0);
         font-style: italic;
     }
     .del{
@@ -382,7 +389,7 @@
     td.tdpag{
         display: block;
     }
-    #spcodigo{
+    #spcodigo, #hidarea, #wpp{
         display: none;
     }
 }
