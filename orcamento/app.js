@@ -58,13 +58,13 @@ function copiawhatsapp(){
     html += "Nome: "+ cliente +"&#10;";
     html += "Data: "+ diaset +"&#10;";
     html += "Qnt.: "+calc["qnt"]+"&#10;Total: "+calc["tot"]+"&#10;&#10;";
-    html += "Cod.          Descrição&#10;";
+    html += "Cod.            Descrição&#10;";
 
     pecaswpp.forEach((e)=>{
         if(e[1]==true){
             r = 2*(6-e[0].length);
             desc = descricao(e[0]);
-            html += e[0].slice(0,2)+"."+e[0].slice(2)+".90"+esp.repeat(r)+desc+"&#10;";
+            html += e[0].slice(0,2)+"."+e[0].slice(2)+".90&nbsp;"+esp.repeat(r)+desc+"&#10;";
         }
     })
     document.querySelector("#hidarea").innerHTML=html;
