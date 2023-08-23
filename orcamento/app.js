@@ -174,13 +174,13 @@ function checkNumber(event){
 
 function remove(id){
     pecas[id][1]=false;
-    //cod.focus();
+    cod.focus({preventScroll: true});
     listar();
     //return false;
 }
 function volta(id){
     pecas[id][1]=true;
-    //cod.focus();
+    cod.focus({preventScroll: true});
     listar();
     //return false;
 }
