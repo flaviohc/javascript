@@ -174,17 +174,19 @@ function checkNumber(event){
 
 function remove(id){
     pecas[id][1]=false;
-    cod.focus();
+    //cod.focus();
     listar();
+    //return false;
 }
 function volta(id){
     pecas[id][1]=true;
-    cod.focus();
+    //cod.focus();
     listar();
+    //return false;
 }
 
 function listar(){
-    html="";
+    html = "";
     soma=0;
     pag=1;
     npag = Math.ceil(pecas.length/pecaspag);
@@ -195,10 +197,11 @@ function listar(){
 
         if(element[1] == false){
             atrib = "excluido";
-            but = "<td class='tddel'><button id='rm"+index+"' class='res' onclick='volta("+index+")'> < </button></td>";;
+            but = "<td class='tddel'><button id='rm"+index+"' class='res' onclick='volta("+index+")'> < </button></td>";
         }else{
             atrib = "";
             but = "<td class='tddel'><button id='rm"+index+"' class='del' onclick='remove("+index+")'> x </button></td>";
+            //but = "<td class='tddel'><button id='rm"+index+"' class='del'> x </button></td>";
         }
         if(index==0){
             html+="<tr class='altquebra'><td></td><td></td><td></td><td></td><td></td><td class='preco'></td></tr>";
@@ -214,6 +217,12 @@ function listar(){
         }
     });
     document.querySelector("#lista").innerHTML = html;
+    // document.querySelectorAll('[class="del"]').forEach((element,index) => {
+    //     element.addEventListener('click',(e)=>{
+    //         e.preventDefault();
+    //         remove(index);
+    //     })
+    // });
     calcular();
 }
 
