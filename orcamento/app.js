@@ -40,11 +40,12 @@ document.querySelector("#save").addEventListener('click',()=>{
 })
 
 function whatsapp(){
-    document.querySelector("#wpp").addEventListener('click', copiawhatsapp)
+    document.querySelector("#wpp").style.display= "block";
+    document.querySelector("#wpp").addEventListener('click', copiawhatsapp);
 }
 
 function copiawhatsapp(){
-    let desc = "";
+    let desc = til = "";
     let r = 1;
     let esp = "&nbsp;";
     let html = "";
@@ -55,18 +56,29 @@ function copiawhatsapp(){
 
     pecaswpp.sort();
 
+    html += "*Orçamento* &#10;";
     html += "Nome: "+ cliente +"&#10;";
     html += "Data: "+ diaset +"&#10;";
     html += "Qnt.: "+calc["qnt"]+"&#10;Total: "+calc["tot"]+"&#10;&#10;";
     html += "Cod.            Descrição&#10;";
 
     pecaswpp.forEach((e)=>{
-        if(e[1]==true){
-            r = 2*(6-e[0].length);
-            desc = descricao(e[0]);
-            html += e[0].slice(0,2)+"."+e[0].slice(2)+".90&nbsp;"+esp.repeat(r)+desc+"&#10;";
+        if(codjson == ""){
+            if(e[1]==true){
+                linha(e);
+            }
+        }else{
+            e[1]==true ? til="" : til="~";
+            linha(e);
         }
     })
+
+    function linha(e){
+        r = 2*(6-e[0].length);
+        desc = descricao(e[0]);
+        html += til+e[0].slice(0,2)+"."+e[0].slice(2)+".90&nbsp;"+esp.repeat(r)+desc+til+"&#10;";
+    }
+
     document.querySelector("#hidarea").innerHTML=html;
     copiar("#hidarea");
 }
@@ -296,7 +308,6 @@ function salvar(){
     document.querySelector("#cod").focus();
     spcopy.style.display="block";
 
-    document.querySelector("#wpp").style.display= "block";
     whatsapp();
 
     document.querySelectorAll('[id^="rm"]').forEach(element => {
@@ -380,8 +391,10 @@ function restaurar(){
     textojson = JSON.parse(codjson);
     textojson.itens.forEach(e=>pecas.push([e,true]));
     pecas.sort();
-    document.querySelector("#divcliente").textContent = "Cliente: "+ textojson.nome;
-    document.querySelector("#divdia").textContent = "Data: " + textojson.dia;
+    cliente = textojson.nome;
+    diaset = textojson.dia;
+    document.querySelector("#divcliente").textContent = "Cliente: "+ cliente;
+    document.querySelector("#divdia").textContent = "Data: " + diaset;
     document.querySelector(".inicio").style.display = "none";
     document.querySelector(".thead").style.display = "block";
     document.querySelector("#qnt").style.display = "inline-block";
@@ -393,6 +406,7 @@ function restaurar(){
     devolucao = true;
     cod.focus();
     listar();
+    whatsapp();
 }
 
 document.querySelector("#restaurar").addEventListener('click',()=>{
