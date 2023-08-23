@@ -46,6 +46,7 @@ function whatsapp(){
 
 function copiawhatsapp(){
     let desc = til = "";
+    let ita = "_";
     let r = 1;
     let esp = "&nbsp;";
     let html = "";
@@ -57,18 +58,20 @@ function copiawhatsapp(){
     pecaswpp.sort();
 
     html += "*Orçamento* &#10;";
-    html += "Nome: "+ cliente +"&#10;";
-    html += "Data: "+ diaset +"&#10;";
-    html += "Qnt.: "+calc["qnt"]+"&#10;Total: "+calc["tot"]+"&#10;&#10;";
-    html += "Cod.            Descrição&#10;";
+    html += "Nome: _"+ cliente +"_&#10;";
+    html += "Data: _"+ diaset +"_&#10;";
+    html += "Qnt.: _"+calc["qnt"]+" itens_&#10;Total: _R$"+calc["tot"]+"_&#10;&#10;";
+    html += "*Cod.*            *Descrição*&#10;";
 
     pecaswpp.forEach((e)=>{
         if(codjson == ""){
             if(e[1]==true){
+                ita="_";
                 linha(e);
             }
         }else{
             e[1]==true ? til="" : til="~";
+            ita = "";
             linha(e);
         }
     })
@@ -76,7 +79,7 @@ function copiawhatsapp(){
     function linha(e){
         r = 2*(6-e[0].length);
         desc = descricao(e[0]);
-        html += til+e[0].slice(0,2)+"."+e[0].slice(2)+".90&nbsp;"+esp.repeat(r)+desc+til+"&#10;";
+        html += ita+til+e[0].slice(0,2)+"."+e[0].slice(2)+".90"+ita+"&nbsp;"+esp.repeat(r)+desc+til+"&#10;";
     }
 
     document.querySelector("#hidarea").innerHTML=html;
