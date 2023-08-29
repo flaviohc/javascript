@@ -1,0 +1,50 @@
+body{
+    display: flex;
+    padding: 10px 30px;
+    margin: 0;
+    flex-flow: row ;
+    justify-content: center;
+    background-color: rgb(8, 107, 255);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    gap: 5px;
+}
+.daytasks{
+    display:flex;
+    flex-flow: column;
+    gap: 3px;
+    height: 95%;
+    /* border: 1px solid black; */
+}
+.dia{
+    display: flex;
+    flex-flow: column;
+    padding: 10px 5px;
+    margin: 0px;
+    background-color: rgba(231, 206, 255, 0.5);
+    gap: 10px;
+    width: 250px;
+    height: 600px;
+}
+.task{
+    background-color: aliceblue;
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 10px;
+    color: rgb(87, 87, 87);
+}
+.deleted{
+    text-decoration: line-through;
+}
+.dragging{
+    opacity: 50%;
+}
+div{
+    /* border: 1px solid black; */
+}
+p{
+    text-align: center;
+    color: aliceblue;
+    /* border: 1px solid black; */
+    margin: 0;
+}
