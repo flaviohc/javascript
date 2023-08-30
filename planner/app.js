@@ -1,41 +1,77 @@
-function days(){
-    for (let i = 1; i<=7; i++){
-        dqs('body').insertAdjacentHTML('beforeend','<div id="day'+i+'"></div>');
+constructor();
+function constructor(){
+    tasklists = [
+        {day: 'Segunda', lista: [['Melancia',true],['Abacate',false],['Banana',false]]},
+        {day: 'Terça', lista: [['Melancia',true],['Abacate',false],['Banana',false]]},
+        {day: 'Quarta', lista: [['Melancia',true],['Abacate',false],['Banana',false]]},
+        {day: 'Quinta', lista: [['Melancia',true],['Abacate',false],['Banana',false]]},
+        {day: 'Sexta', lista: [['Melancia',true],['Abacate',false],['Banana',false]]},
+        {day: 'Sábado', lista: [['Melancia',true],['Abacate',false],['Banana',false]]},
+        {day: 'Domingo', lista: [['Melancia',true],['Abacate',false],['Banana',false]]}
+    ];
+    //adiciona os dias
+    days(7);
+    //adiciona os titulos dos dias
+    titles();
+    //adiciona os inputs
+    inputs();
+    //adiciona as tarefas
+    tasks();
+    //adiciona checkboxes nas tarefas
+    checkboxes();
+    // adiciona as classes nas tarefas
+    classes();
+
+    function days(d=7){
+        for (let i = 0; i<d; i++){
+            dqs('body').insertAdjacentHTML('beforeend','<div id="day'+i+'"></div>');
+        }
+    }
+    function titles(){
+        tasklists.forEach((e, index)=>{
+            // index++;
+            let el = "#day"+index;
+            let day = e['day'];
+            dqs(el).insertAdjacentHTML('beforeend','<p>'+day+'</p>');
+            dqs(el).insertAdjacentHTML('beforeend', '<div id="tasklist'+index+'"></div>');
+        });
+    }
+    function inputs(){
+        dqa('tasklist').forEach((e, index)=>{
+            index++;
+            e.insertAdjacentHTML('beforebegin', "<input type='text' id='txt"+index+"'>");
+        })
+    }
+    function tasks(){
+        tasklists.forEach((e,index)=>{
+            e['lista'].forEach((item)=>{
+                if(item[1]){
+                    dqs('#tasklist'+index).insertAdjacentHTML('beforeend','<div class="task" id="t7_1" draggable="true">'+item[0]+'</div>');
+                }else{
+                    dqs('#tasklist'+index).insertAdjacentHTML('beforeend','<div class="task deleted" draggable="true">'+item[0]+'</div>');
+                }
+            })
+        })
+    }
+
+    function checkboxes(){
+        dqsa('[class="task"]').forEach((e)=>{
+            e.insertAdjacentHTML('afterbegin','<input type="checkbox">');
+        })
+        dqsa('.deleted').forEach((e)=>{
+            e.insertAdjacentHTML('afterbegin','<input type="checkbox" checked>');
+        })
+    }
+    function classes(){
+        dqa("day").forEach((day)=>{
+            day.classList.add('dia');
+        })
+        dqa("tasklist").forEach((day)=>{
+            day.classList.add('daytasks');
+        })
     }
 }
-days();
-function titles(){
-    let days = ['Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'];
-    days.forEach((e, index)=>{
-        index++;
-        let el = "#day"+index;
-        dqs(el).insertAdjacentHTML('beforeend','<p>'+e+'</p>');
-        dqs(el).insertAdjacentHTML('beforeend', '<div id="tasklist'+index+'"></div>');
-    });
-}
-titles();
 
-function tasks(){
-    let tasklist7 = [['Melancia',true],['Abacate',false],['Banana',false]];
-    tasklist7.forEach((e)=>{
-        if(e[1]){
-            dqs('#tasklist7').insertAdjacentHTML('beforeend','<div class="task" id="t7_1" draggable="true">'+e[0]+'</div>');
-        }else{
-            dqs('#tasklist7').insertAdjacentHTML('beforeend','<div class="task deleted" draggable="true">'+e[0]+'</div>');
-        }
-    })
-    checkboxes();
-}
-tasks();
-function classes(){
-    dqa("day").forEach((day)=>{
-        day.classList.add('dia');
-    })
-    dqa("tasklist").forEach((day)=>{
-        day.classList.add('daytasks');
-    })
-}
-classes();
 
 //Drag and Drop
 columns = dqsa('.daytasks');
@@ -55,7 +91,9 @@ columns.forEach((item)=>{
         if(applyAfter){
             applyAfter.insertAdjacentElement('afterend', dragging);
         }else{
-            item.prepend(dragging);
+            if(dragging){
+                item.prepend(dragging);
+            }
         }
         e.preventDefault() ;
     })
@@ -76,14 +114,7 @@ function getNewPosition(column, posY){
 }
 // FIM drag and Drop
 
-function checkboxes(){
-    dqsa('[class="task"]').forEach((e)=>{
-        e.insertAdjacentHTML('afterbegin','<input type="checkbox">');
-    })
-    dqsa('.deleted').forEach((e)=>{
-        e.insertAdjacentHTML('afterbegin','<input type="checkbox" checked>');
-    })
-}
+
 
 // function delete(){
     
