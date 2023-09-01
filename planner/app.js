@@ -15,17 +15,8 @@ function constructor(d){
         titles(i);
         tasks(i);
     }
-    //adiciona os dias
-    // days(5);
-    //adiciona os titulos dos dias
-    // titles(5);
-    //adiciona os inputs
+
     inputs();
-    //adiciona as tarefas
-    // tasks();
-    //adiciona checkboxes nas tarefas
-    //checkboxes();
-    // adiciona as classes nas tarefas
     classes();
 
     function days(i){
@@ -49,15 +40,6 @@ function constructor(d){
             })
         ativaCb();
     }
-
-    // function checkboxes(){
-    //     dqsa('[class="task"]').forEach((e)=>{
-    //         e.insertAdjacentHTML('afterbegin','<input type="checkbox">');
-    //     })
-    //     dqsa('.deleted').forEach((e)=>{
-    //         e.insertAdjacentHTML('afterbegin','<input type="checkbox" checked>');
-    //     })
-    // }
 
     function classes(){
         dqa("day").forEach((day)=>{
@@ -149,20 +131,51 @@ function getArray(){
 }
 //getArray();
 
-
 //Drag and Drop
+
+// elem.addEventListener("touchstart", dragEnter); 
+// elem.addEventListener("touchmove", dragOver ); 
+// elem.addEventListener("touchend", drop);
+// elem.addEventListener("touchcancel", dragLeave);
+
 columns = dqsa('.daytasks');
+
+//for mobile
+document.addEventListener("touchstart", (e)=>{
+    e.target.classList.add('dragging');
+});
+
+document.addEventListener("touchend", (e)=>{
+    e.target.classList.remove('dragging');
+    //getArray();
+})
 
 document.addEventListener('dragstart', (e)=>{
     e.target.classList.add('dragging');
 })
+
 document.addEventListener("dragend", (e)=>{
     e.target.classList.remove('dragging');
     //getArray();
 })
 
 columns.forEach((item)=>{
-    item.addEventListener('dragover',(e)=>{
+    item.addEventListener('dragover',over);
+    item.addEventListener('touchover',over);
+    // (e)=>{
+    //     const dragging = dqs('.dragging');
+    //     const applyAfter = getNewPosition(item, e.clientY);
+
+    //     if(applyAfter){
+    //         applyAfter.insertAdjacentElement('afterend', dragging);
+    //     }else{
+    //         if(dragging){
+    //             item.prepend(dragging);
+    //         }
+    //     }
+    //     e.preventDefault() ;
+    // })
+    function over(e){
         const dragging = dqs('.dragging');
         const applyAfter = getNewPosition(item, e.clientY);
 
@@ -174,7 +187,7 @@ columns.forEach((item)=>{
             }
         }
         e.preventDefault() ;
-    })
+    }
 })
 
 function getNewPosition(column, posY){
@@ -191,9 +204,3 @@ function getNewPosition(column, posY){
     return result;
 }
 // FIM drag and Drop
-
-
-
-// function delete(){
-    
-// }
