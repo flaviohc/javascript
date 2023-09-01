@@ -1,13 +1,13 @@
 constructor(7);
 function constructor(d){
     tasklists = [
-        {day: 'Segunda', lista: [['Melancia',true],['Abacate',false],['Banana',false]]},
-        {day: 'Terça', lista: [['Melancia',true],['Abacate',false],['Banana',false]]},
-        {day: 'Quarta', lista: [['Melancia',true],['Abacate',false],['Banana',false]]},
-        {day: 'Quinta', lista: [['Melancia',true],['Abacate',false],['Banana',false]]},
-        {day: 'Sexta', lista: [['Melancia',true],['Abacate',false],['Banana',false]]},
-        {day: 'Sábado', lista: [['Melancia',true],['Abacate',false],['Banana',false]]},
-        {day: 'Domingo', lista: [['Melancia',true],['Abacate',false],['Banana',false]]}
+        {name: 'Segunda', lista: []},
+        {name: 'Terça', lista: []},
+        {name: 'Quarta', lista: []},
+        {name: 'Quinta', lista: []},
+        {name: 'Sexta', lista: []},
+        {name: 'Sábado', lista: []},
+        {name: 'Domingo', lista: []}
     ];
 
     for (let i = 0; i<d; i++){
@@ -34,7 +34,7 @@ function constructor(d){
 
     function titles(i){
         let el = "#day"+i;
-        let day = tasklists[i]['day'];
+        let day = tasklists[i]['name'];
         dqs(el).insertAdjacentHTML('beforeend','<p>'+day+'</p>');
         dqs(el).insertAdjacentHTML('beforeend', '<div id="tasklist'+i+'"></div>');
     }
@@ -46,12 +46,6 @@ function constructor(d){
     function tasks(i){
             tasklists[i]['lista'].forEach((item)=>{
                 adicionar('#tasklist'+i,item);
-                // if(item[1]){
-                //     dqs('#tasklist'+i).insertAdjacentHTML('beforeend','<div class="task" draggable="true">'+item[0]+'</div>');
-                // }else{
-                //     dqs('#tasklist'+i).insertAdjacentHTML('beforeend','<div class="task deleted" draggable="true">'+item[0]+'</div>');
-                //     // id="e'+i+'_'+index+'"
-                // }
             })
         ativaCb();
     }
@@ -104,27 +98,37 @@ dqa('txt').forEach((element,index) => {
     }) 
 })
 
+//deleta tarefa
+function deletar(){
+    dqsa('img').forEach((e)=>{
+        e.addEventListener('click',()=>{
+            e.parentElement.remove();
+        })
+    })
+}
+
 function adicionar(tl,ar){
     const txt = ar[0].charAt(0).toUpperCase() + ar[0].slice(1);
     if(ar[1]){
-        dqs(tl).insertAdjacentHTML('beforeend','<div class="task" draggable="true"><input type="checkbox">'+txt+'</div>');
+        dqs(tl).insertAdjacentHTML('beforeend','<div class="task" draggable="true"><div class="tleft"><input type="checkbox">'+txt+'</div><img src="img/close.png"></div>');
     }else{
         dqs(tl).insertAdjacentHTML('beforeend','<div class="task deleted" draggable="true"><input type="checkbox" checked>'+txt+'</div>');
         // id="e'+i+'_'+index+'"
     }
     ativaCb();
+    deletar();
 }
 
 //Atualiza a Array de itens
 function getArray(){
     let newList = [
-        {day: 'Segunda', lista: []},
-        {day: 'Terça', lista: []},
-        {day: 'Quarta', lista: []},
-        {day: 'Quinta', lista: []},
-        {day: 'Sexta', lista: []},
-        {day: 'Sábado', lista: []},
-        {day: 'Domingo', lista: []}
+        {name: 'Segunda', lista: []},
+        {name: 'Terça', lista: []},
+        {name: 'Quarta', lista: []},
+        {name: 'Quinta', lista: []},
+        {name: 'Sexta', lista: []},
+        {name: 'Sábado', lista: []},
+        {name: 'Domingo', lista: []}
         ];
 
     dqa('tasklist').forEach((e,index)=>{

@@ -32,9 +32,11 @@ body{
     height: 600px;
 }
 .task{
+    display: flex;
+    flex-flow: row;
     background-color: aliceblue;
     border: 1px solid black;
-    padding: 10px;
+    padding: 10px 5px;
     border-radius: 10px;
     color: rgb(87, 87, 87);
 }
@@ -61,6 +63,9 @@ body{
 .dragging{
     opacity: 50%;
 }
+.tleft{
+    width: 95%;
+}
 div{
     /* border: 1px solid black; */
 }
@@ -76,4 +81,9 @@ input[type=text]{
     height: 30px;
     border: 1px solid grey;
     text-transform: capitalize
+}
+img{
+    width: 20px;
+    height: 20px;
+    align-self: end;
 }
