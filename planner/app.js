@@ -1,5 +1,5 @@
-constructor();
-function constructor(){
+constructor(7);
+function constructor(d){
     tasklists = [
         {day: 'Segunda', lista: [['Melancia',true],['Abacate',false],['Banana',false]]},
         {day: 'Terça', lista: [['Melancia',true],['Abacate',false],['Banana',false]]},
@@ -9,59 +9,62 @@ function constructor(){
         {day: 'Sábado', lista: [['Melancia',true],['Abacate',false],['Banana',false]]},
         {day: 'Domingo', lista: [['Melancia',true],['Abacate',false],['Banana',false]]}
     ];
+
+    for (let i = 0; i<d; i++){
+        days(i);
+        titles(i);
+        tasks(i);
+    }
     //adiciona os dias
-    days(7);
+    // days(5);
     //adiciona os titulos dos dias
-    titles();
+    // titles(5);
     //adiciona os inputs
     inputs();
     //adiciona as tarefas
-    tasks();
+    // tasks();
     //adiciona checkboxes nas tarefas
-    checkboxes();
+    //checkboxes();
     // adiciona as classes nas tarefas
     classes();
 
-    function days(d=7){
-        for (let i = 0; i<d; i++){
-            dqs('body').insertAdjacentHTML('beforeend','<div id="day'+i+'"></div>');
-        }
+    function days(i){
+        dqs('body').insertAdjacentHTML('beforeend','<div id="day'+i+'"></div>');
     }
-    function titles(){
-        tasklists.forEach((e, index)=>{
-            // index++;
-            let el = "#day"+index;
-            let day = e['day'];
-            dqs(el).insertAdjacentHTML('beforeend','<p>'+day+'</p>');
-            dqs(el).insertAdjacentHTML('beforeend', '<div id="tasklist'+index+'"></div>');
-        });
+
+    function titles(i){
+        let el = "#day"+i;
+        let day = tasklists[i]['day'];
+        dqs(el).insertAdjacentHTML('beforeend','<p>'+day+'</p>');
+        dqs(el).insertAdjacentHTML('beforeend', '<div id="tasklist'+i+'"></div>');
     }
     function inputs(){
         dqa('tasklist').forEach((e, index)=>{
-            index++;
-            e.insertAdjacentHTML('beforebegin', "<input type='text' id='txt"+index+"'>");
+            e.insertAdjacentHTML('beforebegin', "<div class='inputtask'><input type='text' id='txt"+index+"' placeholder='add task'></div>");
         })
     }
-    function tasks(){
-        tasklists.forEach((e,index)=>{
-            e['lista'].forEach((item)=>{
-                if(item[1]){
-                    dqs('#tasklist'+index).insertAdjacentHTML('beforeend','<div class="task" id="t7_1" draggable="true">'+item[0]+'</div>');
-                }else{
-                    dqs('#tasklist'+index).insertAdjacentHTML('beforeend','<div class="task deleted" draggable="true">'+item[0]+'</div>');
-                }
+    function tasks(i){
+            tasklists[i]['lista'].forEach((item)=>{
+                adicionar('#tasklist'+i,item);
+                // if(item[1]){
+                //     dqs('#tasklist'+i).insertAdjacentHTML('beforeend','<div class="task" draggable="true">'+item[0]+'</div>');
+                // }else{
+                //     dqs('#tasklist'+i).insertAdjacentHTML('beforeend','<div class="task deleted" draggable="true">'+item[0]+'</div>');
+                //     // id="e'+i+'_'+index+'"
+                // }
             })
-        })
+        ativaCb();
     }
 
-    function checkboxes(){
-        dqsa('[class="task"]').forEach((e)=>{
-            e.insertAdjacentHTML('afterbegin','<input type="checkbox">');
-        })
-        dqsa('.deleted').forEach((e)=>{
-            e.insertAdjacentHTML('afterbegin','<input type="checkbox" checked>');
-        })
-    }
+    // function checkboxes(){
+    //     dqsa('[class="task"]').forEach((e)=>{
+    //         e.insertAdjacentHTML('afterbegin','<input type="checkbox">');
+    //     })
+    //     dqsa('.deleted').forEach((e)=>{
+    //         e.insertAdjacentHTML('afterbegin','<input type="checkbox" checked>');
+    //     })
+    // }
+
     function classes(){
         dqa("day").forEach((day)=>{
             day.classList.add('dia');
@@ -72,6 +75,76 @@ function constructor(){
     }
 }
 
+//atualiza estilo de ao marcar checkbox
+function ativaCb(){
+    dqsa('input[type=checkbox]').forEach(element => {  
+        element.addEventListener('click', atualizaCheckbox);
+    });
+}
+
+function atualizaCheckbox(){
+    dqsa('input[type=checkbox]').forEach((cb)=>{
+        if(cb.checked){
+            cb.parentElement.classList.add('deleted');
+        }else{
+            cb.parentElement.classList.remove('deleted');
+        }
+    })
+    //getArray();
+};
+
+//inserir tarefa
+dqa('txt').forEach((element,index) => {
+   element.addEventListener('keypress',(e)=>{
+        if(e.key=='Enter'){
+            let txt = element.value;
+            adicionar('#tasklist'+index, [txt,true]);
+            element.value="";
+        }
+    }) 
+})
+
+function adicionar(tl,ar){
+    const txt = ar[0].charAt(0).toUpperCase() + ar[0].slice(1);
+    if(ar[1]){
+        dqs(tl).insertAdjacentHTML('beforeend','<div class="task" draggable="true"><input type="checkbox">'+txt+'</div>');
+    }else{
+        dqs(tl).insertAdjacentHTML('beforeend','<div class="task deleted" draggable="true"><input type="checkbox" checked>'+txt+'</div>');
+        // id="e'+i+'_'+index+'"
+    }
+    ativaCb();
+}
+
+//Atualiza a Array de itens
+function getArray(){
+    let newList = [
+        {day: 'Segunda', lista: []},
+        {day: 'Terça', lista: []},
+        {day: 'Quarta', lista: []},
+        {day: 'Quinta', lista: []},
+        {day: 'Sexta', lista: []},
+        {day: 'Sábado', lista: []},
+        {day: 'Domingo', lista: []}
+        ];
+
+    dqa('tasklist').forEach((e,index)=>{
+        let task = e.querySelectorAll('.task');
+        task.forEach((item,i)=>{
+            //console.log(i);
+            let newTask = [];
+            newTask[0] = item.textContent;
+            if(item.classList.contains('deleted')){
+                newTask[1] = false;
+            }else{
+                newTask[1] = true;
+            }
+            newList[index]['lista'][i] = newTask;
+        })
+    });
+    console.log(newList);
+}
+//getArray();
+
 
 //Drag and Drop
 columns = dqsa('.daytasks');
@@ -81,6 +154,7 @@ document.addEventListener('dragstart', (e)=>{
 })
 document.addEventListener("dragend", (e)=>{
     e.target.classList.remove('dragging');
+    //getArray();
 })
 
 columns.forEach((item)=>{
