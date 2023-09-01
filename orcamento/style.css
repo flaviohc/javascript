@@ -389,7 +389,7 @@
     td.tdpag{
         display: block;
     }
-    #spcodigo, #hidarea, #wpp{
+    #spcodigo, #hidarea, #wpp, #alerta{
         display: none;
     }
 }
